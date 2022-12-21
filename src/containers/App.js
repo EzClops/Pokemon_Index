@@ -5,8 +5,8 @@ import Searchbox from '../components/Searchbox';
 import Scroll from '../components/Scroll';
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       pokemon: [],
       searchfield:''
@@ -34,7 +34,7 @@ class App extends Component {
     this.setState( {searchfield: event.target.value})
   }
 
-
+  
 
   
   render() {
@@ -42,6 +42,10 @@ class App extends Component {
     const filterPokemon = pokemon.filter(poke => {
       return poke.name.toLowerCase().includes(searchfield.toLocaleLowerCase());
     })
+    const filterPokemon2 = pokemon.filter(poke => {
+      return poke.types[0].type.name.toLowerCase().includes(searchfield.toLocaleLowerCase());
+    })
+    const ref = React.createRef();
       return (
         <div className="App bg-dark-red">
           <header className="App-header bg-light-red">
@@ -52,7 +56,11 @@ class App extends Component {
                 <Searchbox searchChange = { this.onSearchChange }/>
               </div>
               <Scroll>
-                <PokeCardSet pokemon={filterPokemon}/>
+                
+                  <PokeCardSet pokemon={filterPokemon}/>
+                  
+                  <PokeCardSet pokemon={filterPokemon2}/>
+                
               </Scroll>
                 
               
